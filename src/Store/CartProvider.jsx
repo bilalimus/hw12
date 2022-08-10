@@ -2,10 +2,11 @@ import React, { useReducer } from "react";
 import CartContext from "./cartContext";
 
 const cartReducer = (state, action) => {
+  const filteredItems = state.items.filter((el) => el.id !== action.food.id)
   switch (action.type) {
     case "ADD_FOOD":
       return {
-        items: [...state.items, action.food],
+        items: [...filteredItems, action.food],
         totalAmount: state.totalAmount + action.food.totalAmount,
         totalPrice: state.totalPrice + action.food.price,
       };
