@@ -19,7 +19,7 @@ const cartReducer = (state, action) => {
     case "CLEAR_FOOD":
       return { type: [], totalAmount: 0 };
       
-     return state;
+     default: return state;
   }
 
 
