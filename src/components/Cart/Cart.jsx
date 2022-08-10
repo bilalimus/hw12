@@ -4,20 +4,26 @@ import CartContext from "../../Store/cartContext";
 import classes from "./Cart.module.css";
 
 function Cart(props) {
+  const cartCtx = useContext(CartContext)
+
   const cartItems = (
     <ul className={classes["cart-items"]}>
-      {[{ id: "c1", name: "sushi", amount: 2, price: 12.99 }].map((item) => {
+      {cartCtx.items.map((item) => {
         return <li key={item.id}>{item.name}</li>;
       })}
     </ul>
   );
+  
+  
+
+  console.log(cartCtx);
 
   return (
     <Modal onCloseCart={props.onCloseCart}>
       {cartItems}
       <div>
         <div className={classes.total}>
-          <span>Total Amoung</span>
+          <span>Total Amount</span>
           <span>44</span>
         </div>
         <div className={classes.actions}>
