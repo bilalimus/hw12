@@ -7,6 +7,7 @@ const cartReducer = (state, action) => {
       return {
         items: [...state.items, action.food],
         totalAmount: state.totalAmount + action.food.totalAmount,
+        totalPrice: state.totalPrice + action.food.price,
       };
     case "DELETE_FOOD":
       return {
@@ -27,10 +28,12 @@ function CartProvider(props) {
   const [stateOrderFood, dispatchOrderFood] = useReducer(cartReducer, {
     items: [],
     totalAmount: 0,
+    totalPrice: 0,
   });
 
   const addItem = (item) => {
     dispatchOrderFood({ type: "ADD_FOOD", food: item });
+    console.log(item, 'приходит для добваления');
   };
   const removeItems = (id) => {
     dispatchOrderFood({ type: "DELETE_FOOD", id: id });
@@ -42,6 +45,7 @@ function CartProvider(props) {
   const cartContext = {
     items: stateOrderFood.items,
     totalAmount: stateOrderFood.totalAmount,
+    totalPrice: stateOrderFood.totalPrice,
     addItem: addItem,
     removeItem: removeItems,
     clearCart: clearCart,
